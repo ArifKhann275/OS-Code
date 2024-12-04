@@ -8,9 +8,6 @@
 using namespace std;
 #define ll long long
 
-
-
- 
 int main() {
 	
 	/*
@@ -22,41 +19,50 @@ int main() {
         ╚═╝  ╚═╝  
 	  
 	*/
-    int at[4]={0,1,5,6};
-    int bt[4]={2,2,3,4};
+    int at[4]={0,0,0,0};
+    int bt[4]={2,5,3,4};
     int ct[4],tat[4],wt[4];
-    int c=0;
-
-    for(int i=0; i<4; i++)
+    int n=4;
+    int t=2;
+    float c=bt[0];
+    
+    for(int i=1; i<n; i++)
     {
-        if(at[i]<=c)
+        if(c<bt[i])
         {
-            c+=bt[i];
-            ct[i]= c;
+            c= bt[i];
         }
-        else
-        {
-            c++;
-            i--;
-        }
-        
     }
-    for(int i=0; i<4;i++)
+    int m= ceil(c/t);
+    cout<<m<<endl;
+    int sum=0;
+    for(int j=0; j<m; j++)
+    {
+        for(int i=0; i<n; i++)
+        {
+            if(bt[i]>t)
+            {
+                bt[i]-=t;
+                sum+=t;
+                ct[i]=sum;
+            }
+            else
+            {
+                sum+=bt[i];
+                if(bt[i]!=0)
+                {
+
+                    ct[i]=sum;
+                }
+                bt[i]=0;
+            }
+        }
+    }
+    for(int i=0; i<n; i++)
     {
         cout<<ct[i]<<" ";
-
-    }  
-    cout<<endl;
-    for(int i=0 ;i< 4; i++)
-    {
-
-        tat[i]=ct[i]-at[i];
-        cout<<tat[i]<<" ";
     }
-    cout<<endl;
-    for(int i=0; i<4; i++)
-    {
-        cout<<tat[i]-bt[i]<<" ";
-    }
+    
+    
     return 0;
 }
